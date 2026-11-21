@@ -1,0 +1,90 @@
+import Post from '../models/postModel.js';
+
+export const createPost = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'Image is required' });
+        }
+
+        const base64 = req.file.buffer.toString('base64');
+        const image = `data:${req.file.mimetype};base64,${base64}`;
+
+        const post = await Post.create({
+            author: req.userId,
+            image,
+            caption: req.body.caption || '',
+        });
+
+        res.status(201).json(post);
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating post', error: error.message });
+    }
+};
+
+export const getUserPosts = async (req, res) => {
+    try {
+        const posts = await Post.find({ author: req.params.userId })
+            .sort({ createdAt: -1 })
+            .populate('author', 'username profileImage');
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching posts', error: error.message });
+    }
+};
+
+export const getPostById = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id)
+            .populate('author', 'username profileImage');
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        res.json(post);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching post', error: error.message });
+    }
+}; 
+
+
+export const updatePost = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        if (post.author.toString() !== req.userId) {
+            return res.status(403).json({ message: 'You can edit only your own posts' });
+        }
+
+        if (req.body.caption !== undefined) post.caption = req.body.caption;
+
+        if (req.file) {
+            const base64 = req.file.buffer.toString('base64');
+            post.image = `data:${req.file.mimetype};base64,${base64}`;
+        }
+
+        await post.save();
+        res.json(post);
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating post', error: error.message });
+    }
+};
+
+export const deletePost = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        if (post.author.toString() !== req.userId) {
+            return res.status(403).json({ message: 'You can delete only your own posts' });
+        }
+
+        await post.deleteOne();
+        res.json({ message: 'Post deleted' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting post', error: error.message });
+    }
+}; 
