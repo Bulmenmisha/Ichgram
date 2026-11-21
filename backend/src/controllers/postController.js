@@ -91,4 +91,14 @@ export const deletePost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error deleting post', error: error.message });
     }
-}; 
+};  
+
+export const getExplorePosts = async (req, res) => {
+    try {
+        const posts = await Post.aggregate([{ $sample: { size: 30 } }]);
+        await Post.populate(posts, { path: 'author', select: 'username profileImage' });
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching explore posts', error: error.message });
+    }
+};
