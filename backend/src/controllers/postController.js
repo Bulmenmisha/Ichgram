@@ -1,4 +1,6 @@
 import Post from '../models/postModel.js';
+import Like from '../models/likeModel.js';
+import Comment from '../models/commentModel.js';
 
 export const createPost = async (req, res) => {
     try {
@@ -82,6 +84,8 @@ export const deletePost = async (req, res) => {
             return res.status(403).json({ message: 'You can delete only your own posts' });
         }
 
+        await Like.deleteMany({ post: post._id });
+        await Comment.deleteMany({ post: post._id });
         await post.deleteOne();
         res.json({ message: 'Post deleted' });
     } catch (error) {

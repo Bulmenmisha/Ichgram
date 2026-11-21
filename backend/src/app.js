@@ -3,6 +3,8 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js'; 
 import userRoutes from './routes/userRoutes.js'; 
 import postRoutes from './routes/postRoutes.js'; 
+import likeRoutes from './routes/likeRoutes.js';
+import commentRoutes from './routes/commentRoutes.js';
 
 const app = express();
 
@@ -11,6 +13,8 @@ app.use(express.json({ limit: '10mb'}));
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes); 
 app.use('/api/posts', postRoutes);
+app.use('/api/likes', likeRoutes);
+app.use('/api/comments', commentRoutes);
 
 app.get('/api/health', (req, res) => {
     res.json({status: 'ok'});
