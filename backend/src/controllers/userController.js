@@ -1,4 +1,6 @@
 import User from '../models/userModel.js';
+import Post from '../models/postModel.js';
+import Follow from '../models/followModel.js';
 
 export const getUserProfile = async (req, res) => {
     try {
@@ -6,7 +8,20 @@ export const getUserProfile = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.json(user);
+        const [postsCount, followersCount, followingCount, isFollowing] = await Promise.all([
+            Post.countDocuments({ author: user._id }),
+            Follow.countDocuments({ following: user._id }),
+            Follow.countDocuments({ follower: user._id }),
+            Follow.exists({ follower: req.userId, following: user._id }),
+        ]);
+
+        res.json({
+            ...user.toObject(),
+            postsCount,
+            followersCount,
+            followingCount,
+            isFollowing: Boolean(isFollowing),
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching profile', error: error.message });
     }
