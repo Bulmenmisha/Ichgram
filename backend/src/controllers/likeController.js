@@ -1,5 +1,6 @@
 import Like from '../models/likeModel.js';
 import Post from '../models/postModel.js';
+import { createNotification } from './notificationController.js'; 
 
 export const toggleLike = async (req, res) => {
     try {
@@ -19,6 +20,7 @@ export const toggleLike = async (req, res) => {
         }
 
         await Like.create({ user: req.userId, post: postId });
+        await createNotification({ recipient: post.author, sender: req.userId, type: 'like', post: postId }); 
         await Post.findByIdAndUpdate(postId, { $inc: { likesCount: 1 } });
         res.json({ liked: true, likesCount: post.likesCount + 1 });
     } catch (error) {

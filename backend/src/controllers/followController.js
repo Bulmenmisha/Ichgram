@@ -1,5 +1,6 @@
 import Follow from '../models/followModel.js';
 import User from '../models/userModel.js';
+import { createNotification } from './notificationController.js'; 
 
 export const followUser = async (req, res) => {
     try {
@@ -20,6 +21,7 @@ export const followUser = async (req, res) => {
         }
 
         await Follow.create({ follower: req.userId, following: targetId });
+        await createNotification({ recipient: targetId, sender: req.userId, type: 'follow' }); 
         res.status(201).json({ message: 'Followed' });
     } catch (error) {
         res.status(500).json({ message: 'Error following user', error: error.message });

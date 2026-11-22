@@ -6,7 +6,8 @@ import postRoutes from './routes/postRoutes.js';
 import likeRoutes from './routes/likeRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import searchRoutes from './routes/searchRoutes.js';
-import followRoutes from './routes/followRoutes.js';  
+import followRoutes from './routes/followRoutes.js'; 
+import notificationRoutes from './routes/notificationRoutes.js'; 
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api/likes', likeRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/follow', followRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 app.get('/api/health', (req, res) => {
     res.json({status: 'ok'});

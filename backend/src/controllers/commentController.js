@@ -1,5 +1,6 @@
 import Comment from '../models/commentModel.js';
 import Post from '../models/postModel.js';
+import { createNotification } from './notificationController.js'; 
 
 export const addComment = async (req, res) => {
     try {
@@ -19,6 +20,7 @@ export const addComment = async (req, res) => {
             text,
         });
         await Post.findByIdAndUpdate(req.params.postId, { $inc: { commentsCount: 1 } });
+        await createNotification({ recipient: post.author, sender: req.userId, type: 'comment', post: post._id }); 
 
         await comment.populate('user', 'username profileImage');
         res.status(201).json(comment);
