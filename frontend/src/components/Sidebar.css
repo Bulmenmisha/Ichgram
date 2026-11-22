@@ -1,0 +1,76 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 245px;
+    height: 100vh;
+    padding: 25px 12px 20px;
+    border-right: 1px solid #dbdbdb;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+}
+
+.sidebar-logo {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 0 12px;
+    margin-bottom: 30px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: none;
+    color: #262626;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+}
+
+.sidebar-item svg {
+    font-size: 26px;
+}
+
+.sidebar-item:hover:not(:disabled) {
+    background: #f2f2f2;
+}
+
+.sidebar-item.active {
+    font-weight: 700;
+}
+
+.sidebar-item:disabled {
+    color: #b0b0b0;
+    cursor: default;
+}
+
+.sidebar-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sidebar-item.active .sidebar-avatar {
+    outline: 2px solid #262626;
+}
+
+.sidebar-logout {
+    color: #737373;
+} 

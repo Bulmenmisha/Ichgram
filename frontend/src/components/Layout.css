@@ -1,0 +1,25 @@
+.layout-main {
+    margin-left: 245px;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+.side-panel {
+    position: fixed;
+    top: 0;
+    left: 245px;
+    width: 400px;
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid #dbdbdb;
+    border-radius: 0 16px 16px 0;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+    padding: 25px 20px;
+    z-index: 15;
+    overflow-y: auto;
+}
+
+.side-panel h2 {
+    font-size: 24px;
+    margin-bottom: 24px;
+} 

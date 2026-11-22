@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Explore from './pages/Explore';
 import Profile from './pages/Profile';
+import Layout from './components/Layout';
 
 function PrivateRoute({ children }) {
     const { user, loading } = useAuth();
@@ -23,9 +24,11 @@ function App() {
         <Routes>
             <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
             <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-            <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-            <Route path="/explore" element={<PrivateRoute><Explore /></PrivateRoute>} />
-            <Route path="/profile/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
+                 <Route path="/" element={<Home />} />
+                 <Route path="/explore" element={<Explore />} />
+                 <Route path="/profile/:id" element={<Profile />} />
+            </Route> 
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     );
