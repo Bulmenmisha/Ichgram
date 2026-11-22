@@ -5,7 +5,8 @@ import {
     getPostById,
     updatePost,
     deletePost,
-    getExplorePosts, 
+    getExplorePosts,
+    getFeed,  
 } from '../controllers/postController.js';
 import { protect } from '../middlewares/authMiddleware.js';
 import { upload } from '../middlewares/uploadMiddleware.js';
@@ -13,6 +14,7 @@ import { upload } from '../middlewares/uploadMiddleware.js';
 const router = Router();
 
 router.post('/', protect, upload.single('image'), createPost);
+router.get('/feed', protect, getFeed); 
 router.get('/explore', protect, getExplorePosts); 
 router.get('/user/:userId', protect, getUserPosts);
 router.get('/:id', protect, getPostById);

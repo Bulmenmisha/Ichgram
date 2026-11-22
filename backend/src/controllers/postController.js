@@ -1,6 +1,7 @@
 import Post from '../models/postModel.js';
 import Like from '../models/likeModel.js';
 import Comment from '../models/commentModel.js';
+import Follow from '../models/followModel.js'; 
 
 export const createPost = async (req, res) => {
     try {
@@ -100,5 +101,31 @@ export const getExplorePosts = async (req, res) => {
         res.json(posts);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching explore posts', error: error.message });
+    }
+}; 
+
+
+export const getFeed = async (req, res) => {
+    try {
+        const follows = await Follow.find({ follower: req.userId }).select('following');
+        const authorIds = follows.map((f) => f.following);
+        authorIds.push(req.userId);
+
+        const posts = await Post.find({ author: { $in: authorIds } })
+            .sort({ createdAt: -1 })
+            .limit(20)
+            .populate('author', 'username profileImage')
+            .lean();
+
+        const likes = await Like.find({
+            user: req.userId,
+            post: { $in: posts.map((p) => p._id) },
+        }).select('post');
+        const likedIds = new Set(likes.map((l) => l.post.toString()));
+
+        const result = posts.map((p) => ({ ...p, isLiked: likedIds.has(p._id.toString()) }));
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching feed', error: error.message });
     }
 };
