@@ -1,0 +1,93 @@
+.profile {
+    max-width: 935px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    display: flex;
+    gap: 80px;
+    padding: 0 40px 40px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-size: 16px;
+}
+
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-top h2 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 40px;
+}
+
+.profile-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.profile-bio {
+    font-size: 14px;
+    white-space: pre-line;
+    margin-top: -12px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.profile-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.profile-empty {
+    text-align: center;
+    color: #737373;
+    margin-top: 40px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 7px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #0095f6;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #efefef;
+    color: #262626;
+}
