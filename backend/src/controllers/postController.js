@@ -42,7 +42,8 @@ export const getPostById = async (req, res) => {
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
-        res.json(post);
+        const isLiked = await Like.exists({ user: req.userId, post: post._id });
+        res.json({ ...post.toObject(), isLiked: Boolean(isLiked) });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching post', error: error.message });
     }

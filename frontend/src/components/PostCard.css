@@ -1,0 +1,75 @@
+.post-card {
+    max-width: 470px;
+    margin: 0 auto 24px;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 16px;
+}
+
+.post-card-header {
+    padding: 8px 0;
+}
+
+.post-card-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #262626;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.post-card-author img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+.post-card-actions {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.post-card-actions button {
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    padding: 0;
+    color: #262626;
+}
+
+.post-card-actions button.liked {
+    color: #ff3040;
+}
+
+.post-card-body {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.post-card-likes {
+    font-weight: 600;
+}
+
+.post-card-comments {
+    background: none;
+    border: none;
+    color: #737373;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+} 
