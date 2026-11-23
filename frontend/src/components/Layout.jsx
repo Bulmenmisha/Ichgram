@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import './Layout.css';
+import CreatePost from './CreatePost';
 
 export default function Layout() {
     const [panel, setPanel] = useState(null);
     const [showCreate, setShowCreate] = useState(false);
+    const [refreshKey, setRefreshKey] = useState(0);
 
     const togglePanel = (name) => {
         setPanel(panel === name ? null : name);
@@ -24,9 +26,14 @@ export default function Layout() {
                 </div>
             )}
             <main className="layout-main" onClick={() => setPanel(null)}>
-                <Outlet />
+            <Outlet key={refreshKey} />
             </main>
-            {showCreate && <p>Create modal (coming soon)</p>}
+            {showCreate && (
+    <CreatePost
+        onClose={() => setShowCreate(false)}
+        onCreated={() => setRefreshKey(refreshKey + 1)}
+    />
+)}
         </div>
     );
 } 

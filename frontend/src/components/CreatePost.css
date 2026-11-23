@@ -1,0 +1,106 @@
+.create-post {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 900px;
+}
+
+.create-post-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.create-post-header h3 {
+    font-size: 16px;
+}
+
+.create-post-header button {
+    justify-self: end;
+    background: none;
+    border: none;
+    color: #0095f6;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.create-post-header button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.create-post-body {
+    display: flex;
+    height: min(70vh, 560px);
+}
+
+.create-post-image {
+    flex: 1.5;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #dbdbdb;
+    min-width: 0;
+}
+
+.create-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.create-post-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #262626;
+}
+
+.create-post-upload svg {
+    font-size: 80px;
+}
+
+.create-post-side {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.create-post-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.create-post-author img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.create-post-side textarea {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.create-post-count {
+    align-self: flex-end;
+    color: #a8a8a8;
+    font-size: 12px;
+}
