@@ -5,6 +5,7 @@ import './Layout.css';
 import CreatePost from './CreatePost';
 import SearchPanel from './SearchPanel';
 import NotificationsPanel from './NotificationsPanel'; 
+import Footer from './Footer';
 
 export default function Layout() {
     const [panel, setPanel] = useState(null);
@@ -33,6 +34,11 @@ export default function Layout() {
             )}
             <main className="layout-main" onClick={() => setPanel(null)}>
             <Outlet key={refreshKey} />
+            <Footer
+    onSearch={() => togglePanel('search')}
+    onNotifications={() => togglePanel('notifications')}
+    onCreate={() => setShowCreate(true)}
+/>
             </main>
             {showCreate && (
     <CreatePost

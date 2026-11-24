@@ -1,0 +1,23 @@
+.not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    min-height: 60vh;
+}
+
+.not-found-image {
+    width: 220px;
+    opacity: 0.6;
+}
+
+.not-found h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.not-found p {
+    color: #737373;
+    font-size: 14px;
+    line-height: 1.5;
+}

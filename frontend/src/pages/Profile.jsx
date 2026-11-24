@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import PostModal from '../components/PostModal';
 import EditProfile from '../components/EditProfile';
 import './Profile.css';
+import NotFound from './NotFound';
 
 export default function Profile() {
     const { id } = useParams();
@@ -13,15 +14,17 @@ export default function Profile() {
     const [posts, setPosts] = useState([]);
     const [openPostId, setOpenPostId] = useState(null);
     const [editing, setEditing] = useState(false);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         setProfile(null);
+        setNotFound(false);
         Promise.all([api.get(`/users/${id}`), api.get(`/posts/user/${id}`)])
             .then(([profileRes, postsRes]) => {
                 setProfile(profileRes.data);
                 setPosts(postsRes.data);
             })
-            .catch((err) => console.error(err));
+            .catch(() => setNotFound(true)); 
     }, [id]);
 
     const toggleFollow = async () => {
@@ -34,6 +37,7 @@ export default function Profile() {
         }
     };
 
+    if (notFound) return <NotFound />;
     if (!profile) return <p style={{ textAlign: 'center' }}>Loading...</p>;
 
     const isMe = user._id === profile._id;
