@@ -31,6 +31,7 @@ export default function Home() {
                     postId={openPostId}
                     onClose={() => setOpenPostId(null)}
                     onDeleted={(id) => setPosts(posts.filter((p) => p._id !== id))}
+                    onChange={(changes) => setPosts(posts.map((p) => (p._id === changes._id ? { ...p, ...changes } : p)))}
                 />
             )}
         </div>

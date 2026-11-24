@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoHeartOutline, IoHeart, IoChatbubbleOutline } from 'react-icons/io5';
 import api from '../api/axios';
@@ -7,6 +7,10 @@ import './PostCard.css';
 export default function PostCard({ post, onOpen }) {
     const [liked, setLiked] = useState(post.isLiked);
     const [likesCount, setLikesCount] = useState(post.likesCount);
+    useEffect(() => {
+        setLiked(post.isLiked);
+        setLikesCount(post.likesCount);
+    }, [post.isLiked, post.likesCount]);
 
     const toggleLike = async () => {
         try {
