@@ -1,5 +1,5 @@
 .post-card {
-    max-width: 470px;
+    max-width: 100%;
     margin: 0 auto 24px;
     border-bottom: 1px solid #dbdbdb;
     padding-bottom: 16px;
@@ -73,3 +73,13 @@
     cursor: pointer;
     font-size: 14px;
 } 
+.post-card-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.post-card-time {
+    color: #737373;
+    font-size: 14px;
+}

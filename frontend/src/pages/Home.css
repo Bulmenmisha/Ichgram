@@ -1,0 +1,30 @@
+.home {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 40px;
+}
+
+.home-end {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.home-end svg {
+    font-size: 80px;
+    color: #c13584;
+}
+
+.home-end p {
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.home-end span {
+    font-size: 13px;
+    color: #737373;
+}

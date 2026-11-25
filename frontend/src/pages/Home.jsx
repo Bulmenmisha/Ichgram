@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import api from '../api/axios';
 import PostCard from '../components/PostCard';
 import PostModal from '../components/PostModal';
+import { IoCheckmarkCircleOutline } from 'react-icons/io5';
+import './Home.css';
 
 export default function Home() {
     const [posts, setPosts] = useState([]);
@@ -22,10 +24,17 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <div className="home">
+            <div className="home-grid">
             {posts.map((post) => (
                 <PostCard key={post._id} post={post} onOpen={(p) => setOpenPostId(p._id)} />
             ))} 
+        </div>
+            <div className="home-end">
+                <IoCheckmarkCircleOutline />
+                <p>You've seen all the updates</p>
+                <span>You have viewed all new publications</span>
+            </div>
                         {openPostId && (
                 <PostModal
                     postId={openPostId}

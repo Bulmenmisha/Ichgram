@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoHeartOutline, IoHeart, IoChatbubbleOutline } from 'react-icons/io5';
 import api from '../api/axios';
 import './PostCard.css';
+import { timeAgo } from '../utils/timeAgo'; 
 
 export default function PostCard({ post, onOpen }) {
     const [liked, setLiked] = useState(post.isLiked);
@@ -29,6 +30,7 @@ export default function PostCard({ post, onOpen }) {
                     <img src={post.author.profileImage || '/avatar.svg'} alt="" />
                     <span>{post.author.username}</span>
                 </Link>
+                <span className="post-card-time">• {timeAgo(post.createdAt)}</span>
             </header>
 
             <img className="post-card-image" src={post.image} alt="" onDoubleClick={toggleLike} />
