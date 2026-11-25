@@ -43,6 +43,12 @@ export default function Register() {
                     <input name="fullName" placeholder="Full Name" value={form.fullName} onChange={handleChange} />
                     <input name="username" placeholder="Username" value={form.username} onChange={handleChange} />
                     <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} />
+                    <p className="auth-small">
+                        People who use our service may have uploaded your contact information to ICHgram. <b>Learn More</b>
+                    </p>
+                    <p className="auth-small">
+                        By signing up, you agree to our <b>Terms</b>, <b>Privacy Policy</b> and <b>Cookies Policy</b>.
+                    </p>
                     <button type="submit" disabled={submitting || !isFilled}>
                         {submitting ? 'Signing up...' : 'Sign up'}
                     </button>

@@ -31,7 +31,9 @@ export default function Login() {
     };
 
     return (
-        <div className="auth-page">
+        <div className="auth-page auth-page-login">
+        <img className="auth-phones" src="/phones.png" alt="" onError={(e) => (e.target.style.display = 'none')} />
+        <div className="auth-column">
             <div className="auth-card">
                 <h1 className="auth-logo">ICHgram</h1>
                 <form onSubmit={handleSubmit} className="auth-form">
@@ -52,10 +54,13 @@ export default function Login() {
                         {submitting ? 'Logging in...' : 'Log in'}
                     </button>
                     {error && <p className="auth-error">{error}</p>}
+                    <div className="auth-divider"><span>OR</span></div>
+                    <span className="auth-forgot">Forgot password?</span>
                 </form>
             </div>
             <div className="auth-card auth-switch">
                 Don't have an account? <Link to="/register">Sign up</Link>
+            </div>
             </div>
         </div>
     );

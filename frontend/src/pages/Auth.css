@@ -82,3 +82,55 @@
     font-weight: 600;
     text-decoration: none;
 } 
+.auth-page-login {
+    flex-direction: row;
+    gap: 32px;
+}
+
+.auth-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 350px;
+}
+
+.auth-phones {
+    width: 380px;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0 10px;
+    color: #737373;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #dbdbdb;
+}
+
+.auth-forgot {
+    color: #00376b;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.auth-small {
+    color: #737373;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+@media (max-width: 875px) {
+    .auth-phones {
+        display: none;
+    }
+}
