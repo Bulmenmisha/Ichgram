@@ -28,3 +28,8 @@
     font-size: 13px;
     color: #737373;
 }
+@media (max-width: 900px) {
+    .home-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

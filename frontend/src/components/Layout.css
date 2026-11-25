@@ -90,3 +90,39 @@
     color: #737373;
     font-size: 14px;
 }
+.panel-backdrop {
+    position: fixed;
+    inset: 0;
+    left: 245px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 14;
+}
+
+@media (max-width: 1100px) {
+    .layout-main {
+        margin-left: 72px;
+    }
+
+    .side-panel,
+    .panel-backdrop {
+        left: 72px;
+    }
+}
+
+@media (max-width: 768px) {
+    .layout-main {
+        margin-left: 0;
+        padding: 20px 12px 80px;
+    }
+
+    .side-panel {
+        left: 0;
+        width: 100%;
+        border-radius: 0;
+        padding-bottom: 80px;
+    }
+
+    .panel-backdrop {
+        display: none;
+    }
+}

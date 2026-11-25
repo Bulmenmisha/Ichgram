@@ -243,3 +243,22 @@
     border-radius: 12px;
     font-weight: 600;
 }
+@media (max-width: 768px) {
+    .modal-overlay {
+        padding: 0;
+    }
+
+    .post-modal {
+        flex-direction: column;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .post-modal-image {
+        max-height: 45vh;
+    }
+
+    .post-modal-side {
+        min-width: 0;
+    }
+}

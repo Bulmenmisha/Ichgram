@@ -24,6 +24,8 @@ export default function Layout() {
                 onCreate={() => setShowCreate(true)}
             />
                         {panel && (
+                <>
+                <div className="panel-backdrop" onClick={() => setPanel(null)} />
                 <div className="side-panel">
                     {panel === 'search' ? (
                         <SearchPanel onClose={() => setPanel(null)} />
@@ -31,6 +33,7 @@ export default function Layout() {
                         <NotificationsPanel onClose={() => setPanel(null)} />
                     )}
                 </div>
+                </>
             )}
             <main className="layout-main" onClick={() => setPanel(null)}>
             <Outlet key={refreshKey} />
