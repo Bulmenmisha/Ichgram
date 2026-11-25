@@ -26,13 +26,23 @@ export default function Profile() {
             .catch(() => setNotFound(true)); 
     }, [id]);
 
+    const [followLoading, setFollowLoading] = useState(false);
+
     const toggleFollow = async () => {
-        if (profile.isFollowing) {
-            await api.delete(`/follow/${id}`);
-            setProfile({ ...profile, isFollowing: false, followersCount: profile.followersCount - 1 });
-        } else {
-            await api.post(`/follow/${id}`);
-            setProfile({ ...profile, isFollowing: true, followersCount: profile.followersCount + 1 });
+        if (followLoading) return;
+        setFollowLoading(true);
+        try {
+            if (profile.isFollowing) {
+                await api.delete(`/follow/${id}`);
+                setProfile({ ...profile, isFollowing: false, followersCount: profile.followersCount - 1 });
+            } else {
+                await api.post(`/follow/${id}`);
+                setProfile({ ...profile, isFollowing: true, followersCount: profile.followersCount + 1 });
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setFollowLoading(false);
         }
     };
 
@@ -57,6 +67,7 @@ export default function Profile() {
                                 <button
                                     className={profile.isFollowing ? 'btn-secondary' : 'btn-primary'}
                                     onClick={toggleFollow}
+                                    disabled={followLoading} 
                                 >
                                     {profile.isFollowing ? 'Unfollow' : 'Follow'}
                                 </button>

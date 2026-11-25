@@ -4,6 +4,9 @@ export const createNotification = async ({ recipient, sender, type, post }) => {
     if (recipient.toString() === sender.toString()) return;
     await Notification.create({ recipient, sender, type, post });
 };
+export const removeNotification = async ({ recipient, sender, type, post }) => {
+    await Notification.deleteOne({ recipient, sender, type, post });
+};
 
 export const getNotifications = async (req, res) => {
     try {

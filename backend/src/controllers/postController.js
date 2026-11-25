@@ -2,6 +2,7 @@ import Post from '../models/postModel.js';
 import Like from '../models/likeModel.js';
 import Comment from '../models/commentModel.js';
 import Follow from '../models/followModel.js'; 
+import Notification from '../models/notificationModel.js';
 
 export const createPost = async (req, res) => {
     try {
@@ -88,6 +89,7 @@ export const deletePost = async (req, res) => {
 
         await Like.deleteMany({ post: post._id });
         await Comment.deleteMany({ post: post._id });
+        await Notification.deleteMany({ post: post._id });
         await post.deleteOne();
         res.json({ message: 'Post deleted' });
     } catch (error) {

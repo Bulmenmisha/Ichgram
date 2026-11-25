@@ -1,6 +1,6 @@
 import Follow from '../models/followModel.js';
 import User from '../models/userModel.js';
-import { createNotification } from './notificationController.js'; 
+import { createNotification, removeNotification } from './notificationController.js'; 
 
 export const followUser = async (req, res) => {
     try {
@@ -37,6 +37,7 @@ export const unfollowUser = async (req, res) => {
         if (!deleted) {
             return res.status(404).json({ message: 'You are not following this user' });
         }
+        await removeNotification({ recipient: req.params.userId, sender: req.userId, type: 'follow' });
         res.json({ message: 'Unfollowed' });
     } catch (error) {
         res.status(500).json({ message: 'Error unfollowing user', error: error.message });
