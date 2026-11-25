@@ -7,6 +7,7 @@ import Explore from './pages/Explore';
 import Profile from './pages/Profile';
 import Layout from './components/Layout';
 import NotFound from './pages/NotFound';
+import EditProfile from './pages/EditProfile';
 
 function PrivateRoute({ children }) {
     const { user, loading } = useAuth();
@@ -29,6 +30,7 @@ function App() {
                  <Route path="/" element={<Home />} />
                  <Route path="/explore" element={<Explore />} />
                  <Route path="/profile/:id" element={<Profile />} />
+                 <Route path="/accounts/edit" element={<EditProfile />} />
                  <Route path="*" element={<NotFound />} />
             </Route> 
         </Routes>

@@ -35,7 +35,7 @@ export const updateProfile = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const { username, fullName, bio } = req.body;
+        const { username, fullName, bio, website } = req.body;
 
         if (username && username !== user.username) {
             const taken = await User.findOne({ username });
@@ -47,6 +47,7 @@ export const updateProfile = async (req, res) => {
 
         if (fullName) user.fullName = fullName;
         if (bio !== undefined) user.bio = bio;
+        if (website !== undefined) user.website = website;
 
         if (req.file) {
             const base64 = req.file.buffer.toString('base64');

@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import PostModal from '../components/PostModal';
-import EditProfile from '../components/EditProfile';
 import './Profile.css';
 import NotFound from './NotFound';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
     const { id } = useParams();
@@ -13,7 +13,6 @@ export default function Profile() {
     const [profile, setProfile] = useState(null);
     const [posts, setPosts] = useState([]);
     const [openPostId, setOpenPostId] = useState(null);
-    const [editing, setEditing] = useState(false);
     const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
@@ -45,19 +44,24 @@ export default function Profile() {
     return (
         <div className="profile">
             <header className="profile-header">
-                <img className="profile-avatar" src={profile.profileImage || '/avatar.svg'} alt="" />
+            <div className="profile-avatar-ring">
+                    <img className="profile-avatar" src={profile.profileImage || '/avatar.svg'} alt="" />
+                </div>
                 <div className="profile-info">
                     <div className="profile-top">
                         <h2>{profile.username}</h2>
                         {isMe ? (
-                            <button className="btn-secondary" onClick={() => setEditing(true)}>Edit profile</button>
+                            <Link to="/accounts/edit" className="btn-secondary">Edit profile</Link>
                         ) : (
-                            <button
-                                className={profile.isFollowing ? 'btn-secondary' : 'btn-primary'}
-                                onClick={toggleFollow}
-                            >
-                                {profile.isFollowing ? 'Unfollow' : 'Follow'}
-                            </button>
+                            <>
+                                <button
+                                    className={profile.isFollowing ? 'btn-secondary' : 'btn-primary'}
+                                    onClick={toggleFollow}
+                                >
+                                    {profile.isFollowing ? 'Unfollow' : 'Follow'}
+                                </button>
+                                <button className="btn-secondary" disabled title="Coming soon">Message</button>
+                            </>
                         )}
                     </div>
                     <div className="profile-stats">
@@ -67,6 +71,16 @@ export default function Profile() {
                     </div>
                     <p className="profile-name">{profile.fullName}</p>
                     {profile.bio && <p className="profile-bio">{profile.bio}</p>}
+                    {profile.website && (
+                        <a
+                            className="profile-website"
+                            href={profile.website.startsWith('http') ? profile.website : `https://${profile.website}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            🔗 {profile.website}
+                        </a>
+                    )}
                 </div>
             </header>
 
@@ -88,12 +102,7 @@ export default function Profile() {
                 />
             )}
 
-            {editing && (
-                <EditProfile
-                    onClose={() => setEditing(false)}
-                    onSaved={(updated) => setProfile({ ...profile, ...updated })}
-                />
-            )}
+            
         </div>
     );
 }
